@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Bites | Budget Meals for Students</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #f6f0e8;
+  --ink: #1d1d1d;
+  --muted: #675f57;
+  --line: rgba(29, 29, 29, 0.1);
+  --card-shadow: 0 20px 50px rgba(68, 48, 28, 0.12);
+  --accent: #d95d39;
+  --accent-dark: #8b2f1d;
+  --leaf: #406343;
+  --instagram: #d4557f;
+  --tiktok: #111111;
+  --facebook: #1d61d6;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(212, 164, 69, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(64, 99, 67, 0.18), transparent 22%),
+    linear-gradient(180deg, #fdf7ef 0%, #f6f0e8 100%);
+}
+a { color: inherit; text-decoration: none; }
+button, select, input { font: inherit; }
+.page-shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 48px; }
+.hero { padding: 12px 0 24px; }
+.topbar,.hero-grid,.theme-grid,.control-grid,.content-grid,.planner-grid,.import-grid,.import-workbench,.form-grid,.form-actions,.planner-actions,.budget-breakdown,.price-row,.meal-card-top,.tag-row,.list-header,.hero-actions,.hero-points { display: flex; }
+.topbar,.list-header,.meal-card-top { justify-content: space-between; align-items: center; }
+.brand { display: flex; gap: 16px; align-items: center; }
+.brand-mark { width: 54px; height: 54px; border-radius: 18px; display: grid; place-items: center; background: linear-gradient(135deg, var(--accent), #f49763); color: white; font-family: "Space Grotesk", sans-serif; font-weight: 700; letter-spacing: 0.04em; box-shadow: var(--card-shadow); }
+.eyebrow { margin: 0 0 4px; color: var(--accent-dark); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 700; }
+h1,h2,h3,h4,.budget-number { font-family: "Space Grotesk", sans-serif; }
+h1,h2,h3,h4,p { margin-top: 0; }
+h1 { margin-bottom: 0; font-size: 1.4rem; }
+h2 { font-size: clamp(2.3rem, 4vw, 4.2rem); line-height: 1; margin-bottom: 18px; max-width: 12ch; }
+h3 { font-size: clamp(1.5rem, 2vw, 2rem); margin-bottom: 10px; }
+.hero-grid { gap: 26px; margin-top: 32px; align-items: stretch; }
+.hero-copy,.hero-card,.theme-panel,.controls,.meal-list-panel,.detail-panel,.import-panel,.planner-panel,.store-panel { background: rgba(255, 250, 244, 0.78); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); border-radius: 28px; box-shadow: var(--card-shadow); }
+.hero-copy { flex: 1.45; padding: 34px; position: relative; overflow: hidden; }
+.hero-copy::after { content: ""; position: absolute; right: -60px; bottom: -80px; width: 220px; height: 220px; border-radius: 42px; background: linear-gradient(135deg, rgba(217, 93, 57, 0.18), rgba(212, 164, 69, 0.08)); transform: rotate(18deg); }
+.hero-card { flex: 0.75; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; }
+.hero-text,.budget-caption,.import-card p,.meal-meta,.detail-empty,.store-note,.ingredient-note { color: var(--muted); line-height: 1.55; }
+.hero-actions,.hero-points,.import-grid,.import-workbench,.form-grid,.form-actions,.planner-actions,.planner-grid,.budget-breakdown,.content-grid,.control-grid,.tag-row { gap: 14px; }
+.hero-actions { margin: 28px 0 24px; }
+.hero-points { flex-wrap: wrap; padding: 0; list-style: none; }
+.hero-points li,.tag { padding: 10px 14px; background: rgba(64,99,67,0.09); color: var(--leaf); border-radius: 999px; font-weight: 600; }
+.card-label,.price-row span,.budget-breakdown span,.detail-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.budget-number { font-size: clamp(3rem, 6vw, 4.8rem); line-height: 0.95; }
+.budget-breakdown { margin-top: 22px; flex-direction: column; }
+.budget-breakdown div { background: rgba(255,255,255,0.72); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+.primary-button,.secondary-button,.ghost-button,.save-button { border: 0; border-radius: 999px; cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease; }
+.primary-button,.secondary-button,.ghost-button { padding: 12px 18px; font-weight: 700; }
+.primary-button { background: var(--accent); color: white; }
+.secondary-button { background: rgba(29,29,29,0.08); color: var(--ink); }
+.ghost-button { background: rgba(255,255,255,0.72); border: 1px solid var(--line); }
+.primary-button:hover,.secondary-button:hover,.ghost-button:hover,.save-button:hover,.meal-card:hover { transform: translateY(-2px); }
+.import-panel,.controls,.meal-list-panel,.detail-panel,.planner-panel,.store-panel,.theme-panel { padding: 28px; }
+.import-panel,.controls,.content-grid,.planner-grid,.theme-panel { margin-top: 24px; }
+.theme-grid,.import-grid,.control-grid,.content-grid,.planner-grid,.form-grid,.import-workbench { flex-wrap: wrap; }
+.theme-grid { gap: 14px; margin-top: 18px; }
+.theme-grid label,.form-grid label,.control-grid label { flex: 1 1 150px; display: flex; flex-direction: column; gap: 10px; font-weight: 700; }
+.theme-grid input[type="color"] { width: 100%; min-height: 52px; border: 1px solid var(--line); border-radius: 16px; background: white; padding: 6px; }
+.import-card,.meal-card,.recipe-form,.import-preview,.planner-summary,.planner-item,.comparison-card { background: rgba(255,255,255,0.78); border: 1px solid var(--line); border-radius: 24px; }
+.import-card,.meal-card { padding: 22px; }
+.import-card { flex: 1 1 220px; }
+.import-card.active { border-color: rgba(217,93,57,0.35); background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,239,231,0.9)); }
+.import-app,.source-pill { display: inline-flex; align-items: center; justify-content: center; padding: 7px 11px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: white; }
+.instagram { background: var(--instagram); }
+.tiktok { background: var(--tiktok); }
+.facebook { background: var(--facebook); }
+.controls { display: block; }
+.import-workbench { margin-top: 22px; align-items: stretch; }
+.recipe-form { flex: 1.2; padding: 22px; }
+.import-preview { flex: 0.8; padding: 22px; }
+.form-heading,.planner-item,.comparison-card,.planner-summary { display: flex; justify-content: space-between; gap: 16px; }
+.form-heading { align-items: center; margin-bottom: 18px; }
+.status-chip { padding: 8px 12px; border-radius: 999px; background: rgba(64,99,67,0.12); color: var(--leaf); font-size: 0.85rem; font-weight: 700; }
+.full-span { flex-basis: 100%; }
+.hidden-input { display: none !important; }
+input[type="text"],input[type="url"],input[type="number"],textarea { width: 100%; border: 1px solid var(--line); border-radius: 16px; padding: 13px 14px; background: white; color: var(--ink); }
+textarea { resize: vertical; min-height: 110px; }
+.form-actions,.planner-actions { margin-top: 18px; }
+.preview-list,.planner-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.preview-list li { padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.preview-list li:last-child { border-bottom: 0; }
+select,input[type="range"] { width: 100%; }
+select { background: white; color: var(--ink); border: 1px solid var(--line); border-radius: 16px; padding: 13px 14px; }
+.range-stack { display: flex; gap: 12px; align-items: center; background: white; border: 1px solid var(--line); border-radius: 16px; padding: 8px 14px; }
+input[type="range"] { accent-color: var(--accent); }
+.content-grid { align-items: flex-start; }
+.meal-list-panel,.planner-panel { flex: 1.2; }
+.detail-panel,.store-panel { flex: 0.8; min-width: 300px; }
+.detail-panel { position: sticky; top: 20px; }
+.meal-grid { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.meal-card { cursor: pointer; transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease; }
+.meal-card.is-active { border-color: rgba(217,93,57,0.45); box-shadow: 0 16px 40px rgba(217,93,57,0.14); }
+.save-button { padding: 8px 12px; background: rgba(29,29,29,0.08); font-weight: 700; }
+.save-button.is-saved { background: rgba(64,99,67,0.12); color: var(--leaf); }
+.price-row { margin: 18px 0 16px; justify-content: space-between; }
+.price-row strong { display: block; margin-top: 4px; font-size: 1.1rem; }
+.tag-row { flex-wrap: wrap; }
+.tag { background: rgba(29,29,29,0.06); color: var(--ink); font-size: 0.9rem; }
+.detail-empty { margin: 0; }
+.detail-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.detail-heading h3 { margin-bottom: 4px; }
+.detail-price { min-width: 110px; text-align: right; }
+.detail-price strong { display: block; font-family: "Space Grotesk", sans-serif; font-size: 1.7rem; }
+.detail-block { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.ingredient-list,.store-list,.steps-list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 12px; }
+.ingredient-item,.store-item,.step-item { background: rgba(255,255,255,0.78); border: 1px solid var(--line); border-radius: 18px; padding: 14px 16px; }
+.ingredient-item,.store-item { display: flex; justify-content: space-between; gap: 12px; }
+.ingredient-item strong,.store-item strong { display: block; }
+.store-distance { color: var(--leaf); font-weight: 700; }
+.step-item span { display: block; color: var(--muted); margin-top: 5px; }
+.empty-state { padding: 28px; border: 1px dashed rgba(29,29,29,0.18); border-radius: 22px; text-align: center; color: var(--muted); }
+.planner-summary,.planner-item,.comparison-card { padding: 18px 20px; }
+.planner-summary { align-items: center; margin-top: 20px; }
+.planner-summary strong,.comparison-card strong,.planner-item strong { font-family: "Space Grotesk", sans-serif; }
+.planner-list,.store-comparison { display: grid; gap: 14px; margin-top: 18px; }
+.planner-item,.comparison-card { align-items: center; }
+.planner-item p,.comparison-card p,.store-panel-copy { color: var(--muted); }
+.planner-item button { border: 0; background: rgba(29,29,29,0.08); border-radius: 999px; padding: 8px 12px; cursor: pointer; }
+@media (max-width: 920px) { .page-shell { width: min(100% - 24px, 1180px); } .hero-grid,.content-grid,.planner-grid { flex-direction: column; } .detail-panel { position: static; } h2 { max-width: 14ch; } }
+@media (max-width: 640px) { .page-shell { width: min(100% - 18px, 1180px); } .hero-copy,.hero-card,.theme-panel,.controls,.meal-list-panel,.detail-panel,.import-panel,.planner-panel,.store-panel { padding: 22px; border-radius: 24px; } .topbar { gap: 14px; align-items: flex-start; flex-direction: column; } .hero-actions { flex-direction: column; } .primary-button,.secondary-button,.ghost-button { width: 100%; text-align: center; } .detail-heading,.ingredient-item,.store-item,.price-row,.form-heading,.planner-item,.comparison-card,.planner-summary { flex-direction: column; } .detail-price { text-align: left; } }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark">CB</span>
+          <div>
+            <p class="eyebrow">Student budget food finder</p>
+            <h1>Campus Bites</h1>
+          </div>
+        </div>
+        <button class="ghost-button" id="savedToggle" type="button">Saved meals: <span id="savedCount">0</span></button>
+      </nav>
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Affordable, reliable, social-first meal planning</p>
+          <h2>Save cheap recipes from social apps and see what they really cost near campus.</h2>
+          <p class="hero-text">Browse meal ideas inspired by Instagram, TikTok, and Facebook, compare ingredient costs, and find nearby stores where a student can shop without blowing their weekly budget.</p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#mealSection">Explore meals</a>
+            <button class="secondary-button" id="focusImport" type="button">View import flow</button>
+          </div>
+          <ul class="hero-points">
+            <li>Visible per-meal price and cost per serving</li>
+            <li>Nearby grocery suggestions by campus</li>
+            <li>Save recipes pulled from social platforms</li>
+          </ul>
+        </div>
+        <aside class="hero-card">
+          <p class="card-label">Weekly budget snapshot</p>
+          <div class="budget-number" id="budgetHeadline">$35</div>
+          <p class="budget-caption">Recommended max weekly food budget in the current filter.</p>
+          <div class="budget-breakdown">
+            <div><span>Average meal total</span><strong id="averageMealCost">$0.00</strong></div>
+            <div><span>Average cost per serving</span><strong id="averageServingCost">$0.00</strong></div>
+          </div>
+        </aside>
+      </section>
+      <section class="theme-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Theme studio</p>
+          <h3>Customize the color palette for your app</h3>
+        </div>
+        <div class="theme-grid">
+          <label>Accent<input id="accentColor" type="color" value="#d95d39"></label>
+          <label>Accent dark<input id="accentDarkColor" type="color" value="#8b2f1d"></label>
+          <label>Background<input id="bgColor" type="color" value="#f6f0e8"></label>
+          <label>Ink<input id="inkColor" type="color" value="#1d1d1d"></label>
+          <label>Muted<input id="mutedColor" type="color" value="#675f57"></label>
+          <label>Leaf<input id="leafColor" type="color" value="#406343"></label>
+        </div>
+        <div class="form-actions"><button class="secondary-button" id="resetTheme" type="button">Reset palette</button></div>
+      </section>
+    </header>
+    <main>
+      <section class="import-panel" id="importSection">
+        <div class="section-heading">
+          <p class="eyebrow">Recipe intake</p>
+          <h3>How recipes can come in from other apps</h3>
+        </div>
+        <div class="import-grid">
+          <article class="import-card active"><span class="import-app instagram">Instagram</span><h4>Reel recipe capture</h4><p>Save a creator post, then extract the meal name, ingredients, and estimated servings into your campus meal board.</p></article>
+          <article class="import-card"><span class="import-app tiktok">TikTok</span><h4>Fast meal idea imports</h4><p>Pull quick dorm-friendly recipes and tag them by prep time, protein level, and cookware needed.</p></article>
+          <article class="import-card"><span class="import-app facebook">Facebook</span><h4>Family and group recipes</h4><p>Save recipes shared in groups, then match ingredients to stores around your campus or apartment.</p></article>
+        </div>
+        <div class="import-workbench">
+          <form class="recipe-form" id="recipeImportForm">
+            <div class="form-heading">
+              <div><p class="eyebrow">Import recipe</p><h4>Save a recipe from social media</h4></div>
+              <span class="status-chip" id="importStatus">Demo import ready</span>
+            </div>
+            <div class="form-grid">
+              <label>Recipe source
+                <select id="importSource">
+                  <option value="Instagram">Instagram</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+              <label class="hidden-input" id="importSourceCustomWrap">Custom source<input id="importSourceCustom" type="text" placeholder="YouTube, Reddit, family blog"></label>
+              <label>Campus<select id="importCampus"></select></label>
+              <label class="hidden-input" id="importCampusCustomWrap">Custom college or campus<input id="importCampusCustom" type="text" placeholder="Howard University"></label>
+              <label class="hidden-input" id="importBudgetCustomWrap">Weekly campus budget<input id="importBudgetCustom" type="number" min="10" max="150" step="1" placeholder="35"></label>
+              <label class="hidden-input" id="importStoreOneWrap">Nearby store 1<input id="importStoreOne" type="text" placeholder="Target, Aldi, campus market"></label>
+              <label class="hidden-input" id="importStoreTwoWrap">Nearby store 2<input id="importStoreTwo" type="text" placeholder="Local grocery"></label>
+              <label class="hidden-input" id="importStoreThreeWrap">Nearby store 3<input id="importStoreThree" type="text" placeholder="Discount store"></label>
+              <label class="full-span">Post or recipe URL<input id="importUrl" type="url" placeholder="https://example.com/creator-recipe"></label>
+              <label>Meal title<input id="importTitle" type="text" placeholder="Dorm Chili Mac"></label>
+              <label>Total meal price<input id="importPrice" type="number" min="1" max="30" step="0.01" placeholder="8.75"></label>
+              <label>Servings<input id="importServings" type="number" min="1" max="8" step="1" placeholder="3"></label>
+              <label>Prep time<input id="importCookTime" type="text" placeholder="15 min"></label>
+              <label class="full-span">Ingredients<textarea id="importIngredients" rows="4" placeholder="Pasta | 8 oz | 1.49&#10;Ground turkey | 1 lb | 4.99&#10;Shredded cheese | 1 cup | 1.79"></textarea></label>
+              <label class="full-span">Recipe steps<textarea id="importSteps" rows="4" placeholder="Boil pasta.&#10;Brown turkey.&#10;Combine with cheese and sauce."></textarea></label>
+            </div>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Import recipe</button>
+              <button class="secondary-button" id="loadExampleRecipe" type="button">Load demo recipe</button>
+            </div>
+          </form>
+          <aside class="import-preview">
+            <p class="eyebrow">Import preview</p>
+            <h4>What gets saved</h4>
+            <ul class="preview-list">
+              <li>Source app and original link</li>
+              <li>Ingredients with visible prices</li>
+              <li>Estimated total and cost per serving</li>
+              <li>Nearby stores matched to the selected campus</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+      <section class="controls" id="mealSection">
+        <div class="section-heading">
+          <p class="eyebrow">Meal browser</p>
+          <h3>Find meals that match your budget and your campus</h3>
+        </div>
+        <div class="control-grid">
+          <label>Campus<select id="campusSelect"></select></label>
+          <label class="hidden-input" id="campusCustomWrap">Custom college or campus<input id="campusCustom" type="text" placeholder="Enter your school name"></label>
+          <label class="hidden-input" id="budgetCustomWrap">Weekly budget<input id="budgetCustom" type="number" min="10" max="150" step="1" placeholder="35"></label>
+          <label class="hidden-input" id="storeOneWrap">Nearby store 1<input id="storeOne" type="text" placeholder="Target, Aldi, campus market"></label>
+          <label class="hidden-input" id="storeTwoWrap">Nearby store 2<input id="storeTwo" type="text" placeholder="Local grocery"></label>
+          <label class="hidden-input" id="storeThreeWrap">Nearby store 3<input id="storeThree" type="text" placeholder="Discount store"></label>
+          <label>Source app<select id="sourceSelect"><option value="all">All apps</option></select></label>
+          <label>Max total meal price<div class="range-stack"><input id="priceRange" type="range" min="6" max="20" step="1" value="14"><span id="priceRangeLabel">$14</span></div></label>
+        </div>
+      </section>
+      <section class="content-grid">
+        <div class="meal-list-panel">
+          <div class="list-header"><h3>Affordable meal ideas</h3><p id="mealCount">0 meals</p></div>
+          <div class="meal-grid" id="mealGrid"></div>
+        </div>
+        <aside class="detail-panel" id="detailPanel"><p class="detail-empty">Choose a meal to see ingredients, prices, and where to shop nearby.</p></aside>
+      </section>
+      <section class="planner-grid">
+        <section class="planner-panel">
+          <div class="section-heading"><p class="eyebrow">Weekly planner</p><h3>Build a week of meals that stays under budget</h3></div>
+          <div class="planner-actions"><button class="primary-button" id="addSelectedToPlan" type="button">Add selected meal to plan</button><button class="ghost-button" id="clearPlan" type="button">Clear plan</button></div>
+          <div class="planner-summary" id="plannerSummary"></div>
+          <div class="planner-list" id="plannerList"></div>
+        </section>
+        <aside class="store-panel">
+          <div class="section-heading"><p class="eyebrow">Store comparison</p><h3>Best nearby places to shop</h3></div>
+          <p class="store-panel-copy">Estimated totals update as you switch campuses and choose different meals.</p>
+          <div class="store-comparison" id="storeComparison"></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <template id="mealCardTemplate">
+    <article class="meal-card">
+      <div class="meal-card-top"><span class="source-pill"></span><button class="save-button" type="button">Save</button></div>
+      <h4 class="meal-title"></h4>
+      <p class="meal-meta"></p>
+      <div class="price-row">
+        <div><span>Total</span><strong class="meal-total"></strong></div>
+        <div><span>Per serving</span><strong class="meal-serving"></strong></div>
+      </div>
+      <div class="tag-row"></div>
+    </article>
+  </template>
+  <script>
+const storageKeys={customMeals:"campusBitesCustomMeals",customCampuses:"campusBitesCustomCampuses",savedMeals:"campusBitesSaved",weeklyPlan:"campusBitesWeeklyPlan",theme:"campusBitesTheme"};
+const defaultTheme={bg:"#f6f0e8",ink:"#1d1d1d",muted:"#675f57",accent:"#d95d39",accentDark:"#8b2f1d",leaf:"#406343"};
+const campusData={"North Lake University":{weeklyBudget:35,stores:[{name:"Target Express",distance:"0.4 mi",multiplier:1,note:"Fastest all-around stop"},{name:"Campus Corner Market",distance:"0.2 mi",multiplier:1.08,note:"Closest walk from dorms"},{name:"Fresh Market Hub",distance:"0.9 mi",multiplier:0.94,note:"Best value on proteins"}]},"City Tech College":{weeklyBudget:32,stores:[{name:"Metro Grocery",distance:"0.5 mi",multiplier:1,note:"Balanced pantry and produce prices"},{name:"Student Union Pantry",distance:"On campus",multiplier:0.72,note:"Free and subsidized staples when available"},{name:"Value Foods",distance:"0.7 mi",multiplier:0.93,note:"Best frozen and breakfast deals"}]},"River State University":{weeklyBudget:30,stores:[{name:"Campus Co-op Market",distance:"0.3 mi",multiplier:1.03,note:"Easy between classes"},{name:"Green Basket",distance:"0.6 mi",multiplier:0.91,note:"Best pantry pricing nearby"},{name:"Discount Mart",distance:"1.1 mi",multiplier:0.87,note:"Worth the longer trip for bulk shopping"}]}};
+const baseMeals=[{id:"spicy-ramen-egg",title:"Spicy Ramen Egg Bowl",source:"TikTok",campus:"North Lake University",totalPrice:6.85,servings:2,cookTime:"12 min",tags:["Dorm friendly","High protein","One pot"],importUrl:"https://www.tiktok.com/example/spicy-ramen-egg",ingredients:[{name:"Instant ramen",amount:"2 packs",price:1.6},{name:"Eggs",amount:"4 large",price:1.48},{name:"Frozen spinach",amount:"1 bag",price:1.69},{name:"Chili crisp",amount:"2 tbsp",price:1.12},{name:"Soy sauce",amount:"1 tbsp",price:0.96}],steps:["Boil the ramen and spinach in the same pot for a quick base.","Soft boil or fry the eggs while the noodles cook.","Stir in soy sauce and chili crisp, then top with eggs."]},{id:"chicken-rice-burrito",title:"Chicken Rice Burrito Bowl",source:"Instagram",campus:"North Lake University",totalPrice:11.2,servings:4,cookTime:"20 min",tags:["Meal prep","Microwave friendly","Budget staple"],importUrl:"https://www.instagram.com/example/chicken-rice-burrito",ingredients:[{name:"Microwave rice",amount:"2 pouches",price:4.0},{name:"Rotisserie chicken",amount:"1 chicken",price:4.99},{name:"Black beans",amount:"1 can",price:1.19},{name:"Salsa",amount:"1 jar",price:1.02}],steps:["Warm the rice and beans together with a little salsa.","Pull the rotisserie chicken into small pieces.","Assemble bowls and portion into containers for later meals."]},{id:"peanut-noodles",title:"Cold Peanut Noodle Cup",source:"Facebook",campus:"City Tech College",totalPrice:8.35,servings:3,cookTime:"15 min",tags:["No oven","Vegetarian","Meal prep"],importUrl:"https://www.facebook.com/example/peanut-noodles",ingredients:[{name:"Spaghetti",amount:"8 oz",price:1.39},{name:"Peanut butter",amount:"4 tbsp",price:1.22},{name:"Cucumber",amount:"1 whole",price:0.99},{name:"Carrots",amount:"1 bag",price:1.49},{name:"Soy sauce",amount:"2 tbsp",price:1.1},{name:"Lime",amount:"1 whole",price:0.89},{name:"Sriracha",amount:"1 tbsp",price:1.27}],steps:["Cook and rinse the pasta until it is cool.","Whisk peanut butter, soy sauce, lime juice, and sriracha.","Toss noodles with sliced vegetables and the sauce."]},{id:"loaded-potato-skillet",title:"Loaded Potato Breakfast Skillet",source:"Instagram",campus:"City Tech College",totalPrice:9.1,servings:4,cookTime:"18 min",tags:["Breakfast","One pan","Filling"],importUrl:"https://www.instagram.com/example/loaded-potato-skillet",ingredients:[{name:"Frozen hash browns",amount:"1 bag",price:2.99},{name:"Eggs",amount:"6 large",price:2.22},{name:"Shredded cheese",amount:"1 bag",price:2.49},{name:"Green onions",amount:"1 bunch",price:0.99},{name:"Greek yogurt",amount:"1 cup",price:0.41}],steps:["Crisp the hash browns in a skillet.","Crack eggs on top and cover until set.","Add cheese, onions, and a spoon of yogurt before serving."]},{id:"lentil-tacos",title:"Lentil Taco Night",source:"TikTok",campus:"River State University",totalPrice:7.4,servings:4,cookTime:"25 min",tags:["Plant based","High fiber","Cheap dinner"],importUrl:"https://www.tiktok.com/example/lentil-tacos",ingredients:[{name:"Brown lentils",amount:"1 lb",price:1.79},{name:"Taco seasoning",amount:"1 packet",price:0.89},{name:"Corn tortillas",amount:"10 count",price:1.49},{name:"Onion",amount:"1 whole",price:0.82},{name:"Tomato",amount:"2 whole",price:1.39},{name:"Cheddar cheese",amount:"1 cup",price:1.02}],steps:["Simmer lentils until tender, then stir in taco seasoning.","Warm tortillas and prep tomato and onion toppings.","Build tacos and use leftovers for lunch bowls the next day."]},{id:"turkey-pesto-melts",title:"Turkey Pesto Melt Sandwiches",source:"Facebook",campus:"River State University",totalPrice:10.55,servings:4,cookTime:"14 min",tags:["Quick lunch","Protein","Air fryer optional"],importUrl:"https://www.facebook.com/example/turkey-pesto-melts",ingredients:[{name:"Sandwich bread",amount:"8 slices",price:2.1},{name:"Deli turkey",amount:"8 oz",price:3.49},{name:"Mozzarella",amount:"6 slices",price:2.19},{name:"Pesto",amount:"3 tbsp",price:1.44},{name:"Tomato",amount:"1 whole",price:1.33}],steps:["Spread pesto on bread and layer turkey, cheese, and tomato.","Toast in a pan or air fryer until the bread is crisp.","Pair with fruit or soup for a fuller meal."]}];
+const customMeals=JSON.parse(localStorage.getItem(storageKeys.customMeals)||"[]");
+const customCampuses=JSON.parse(localStorage.getItem(storageKeys.customCampuses)||"{}");
+const state={campus:"North Lake University",source:"all",maxPrice:14,selectedMealId:null,savedMeals:new Set(JSON.parse(localStorage.getItem(storageKeys.savedMeals)||"[]")),weeklyPlan:JSON.parse(localStorage.getItem(storageKeys.weeklyPlan)||"[]")};
+const elements={campusSelect:document.querySelector("#campusSelect"),importCampus:document.querySelector("#importCampus"),campusCustomWrap:document.querySelector("#campusCustomWrap"),campusCustom:document.querySelector("#campusCustom"),budgetCustomWrap:document.querySelector("#budgetCustomWrap"),budgetCustom:document.querySelector("#budgetCustom"),storeOneWrap:document.querySelector("#storeOneWrap"),storeOne:document.querySelector("#storeOne"),storeTwoWrap:document.querySelector("#storeTwoWrap"),storeTwo:document.querySelector("#storeTwo"),storeThreeWrap:document.querySelector("#storeThreeWrap"),storeThree:document.querySelector("#storeThree"),sourceSelect:document.querySelector("#sourceSelect"),priceRange:document.querySelector("#priceRange"),priceRangeLabel:document.querySelector("#priceRangeLabel"),mealGrid:document.querySelector("#mealGrid"),mealCount:document.querySelector("#mealCount"),detailPanel:document.querySelector("#detailPanel"),savedCount:document.querySelector("#savedCount"),budgetHeadline:document.querySelector("#budgetHeadline"),averageMealCost:document.querySelector("#averageMealCost"),averageServingCost:document.querySelector("#averageServingCost"),focusImport:document.querySelector("#focusImport"),importSection:document.querySelector("#importSection"),savedToggle:document.querySelector("#savedToggle"),cardTemplate:document.querySelector("#mealCardTemplate"),importForm:document.querySelector("#recipeImportForm"),importSource:document.querySelector("#importSource"),importSourceCustomWrap:document.querySelector("#importSourceCustomWrap"),importSourceCustom:document.querySelector("#importSourceCustom"),importStatus:document.querySelector("#importStatus"),importUrl:document.querySelector("#importUrl"),importTitle:document.querySelector("#importTitle"),importPrice:document.querySelector("#importPrice"),importServings:document.querySelector("#importServings"),importCookTime:document.querySelector("#importCookTime"),importCampusCustomWrap:document.querySelector("#importCampusCustomWrap"),importCampusCustom:document.querySelector("#importCampusCustom"),importBudgetCustomWrap:document.querySelector("#importBudgetCustomWrap"),importBudgetCustom:document.querySelector("#importBudgetCustom"),importStoreOneWrap:document.querySelector("#importStoreOneWrap"),importStoreOne:document.querySelector("#importStoreOne"),importStoreTwoWrap:document.querySelector("#importStoreTwoWrap"),importStoreTwo:document.querySelector("#importStoreTwo"),importStoreThreeWrap:document.querySelector("#importStoreThreeWrap"),importStoreThree:document.querySelector("#importStoreThree"),importIngredients:document.querySelector("#importIngredients"),importSteps:document.querySelector("#importSteps"),loadExampleRecipe:document.querySelector("#loadExampleRecipe"),addSelectedToPlan:document.querySelector("#addSelectedToPlan"),clearPlan:document.querySelector("#clearPlan"),plannerSummary:document.querySelector("#plannerSummary"),plannerList:document.querySelector("#plannerList"),storeComparison:document.querySelector("#storeComparison"),accentColor:document.querySelector("#accentColor"),accentDarkColor:document.querySelector("#accentDarkColor"),bgColor:document.querySelector("#bgColor"),inkColor:document.querySelector("#inkColor"),mutedColor:document.querySelector("#mutedColor"),leafColor:document.querySelector("#leafColor"),resetTheme:document.querySelector("#resetTheme")};
+const themeMap={accentColor:"accent",accentDarkColor:"accentDark",bgColor:"bg",inkColor:"ink",mutedColor:"muted",leafColor:"leaf"};
+function formatCurrency(v){return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"}).format(v)}
+function slugify(v){return v.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"")}
+function getAllMeals(){return [...baseMeals,...customMeals]}
+function getMealById(id){return getAllMeals().find(meal=>meal.id===id)}
+function getCampusStores(campus){return customCampuses[campus]?customCampuses[campus].stores:campusData[campus].stores}
+function getCampusBudget(campus){return customCampuses[campus]?customCampuses[campus].weeklyBudget:campusData[campus].weeklyBudget}
+function getAvailableCampuses(){return [...Object.keys(campusData),...Object.keys(customCampuses)]}
+function addCustomCampus(name,weeklyBudget,storeNames=[]){const labels=[storeNames[0]?.trim()||"Campus market",storeNames[1]?.trim()||"Nearby grocery",storeNames[2]?.trim()||"Discount store"];customCampuses[name]={weeklyBudget,stores:[{name:labels[0],distance:"On campus",multiplier:1,note:"Closest option for quick ingredients"},{name:labels[1],distance:"0.8 mi",multiplier:0.95,note:"Best default off-campus value"},{name:labels[2],distance:"1.4 mi",multiplier:0.88,note:"Cheapest estimated basket nearby"}]};localStorage.setItem(storageKeys.customCampuses,JSON.stringify(customCampuses))}
+function buildStoreOptions(meal){return getCampusStores(meal.campus).map(store=>({...store,estimatedTotal:Number((meal.totalPrice*store.multiplier).toFixed(2))}))}
+function enrichMeal(meal){const stores=buildStoreOptions(meal);const cheapestStore=stores.reduce((best,current)=>current.estimatedTotal<best.estimatedTotal?current:best,stores[0]);return {...meal,stores,cheapestStore}}
+function getVisibleMeals(){return getAllMeals().filter(meal=>meal.campus===state.campus&&(state.source==="all"||meal.source===state.source)&&meal.totalPrice<=state.maxPrice).map(enrichMeal)}
+function persistCustomMeals(){localStorage.setItem(storageKeys.customMeals,JSON.stringify(customMeals))}
+function persistSavedMeals(){localStorage.setItem(storageKeys.savedMeals,JSON.stringify([...state.savedMeals]))}
+function persistWeeklyPlan(){localStorage.setItem(storageKeys.weeklyPlan,JSON.stringify(state.weeklyPlan))}
+function loadTheme(){const stored=JSON.parse(localStorage.getItem(storageKeys.theme)||"null");return stored?{...defaultTheme,...stored}:{...defaultTheme}}
+function applyTheme(theme){const root=document.documentElement;root.style.setProperty("--accent",theme.accent);root.style.setProperty("--accent-dark",theme.accentDark);root.style.setProperty("--bg",theme.bg);root.style.setProperty("--ink",theme.ink);root.style.setProperty("--muted",theme.muted);root.style.setProperty("--leaf",theme.leaf)}
+function syncThemeControls(theme){Object.entries(themeMap).forEach(([id,key])=>{elements[id].value=theme[key]})}
+function bindThemeControls(){const currentTheme=loadTheme();applyTheme(currentTheme);syncThemeControls(currentTheme);Object.entries(themeMap).forEach(([id,key])=>{elements[id].addEventListener("input",e=>{currentTheme[key]=e.target.value;applyTheme(currentTheme);localStorage.setItem(storageKeys.theme,JSON.stringify(currentTheme))})});elements.resetTheme.addEventListener("click",()=>{const reset={...defaultTheme};applyTheme(reset);syncThemeControls(reset);localStorage.setItem(storageKeys.theme,JSON.stringify(reset))})}
+function setVisibility(element,visible){element.classList.toggle("hidden-input",!visible)}
+function syncCustomInputVisibility(){const campusCustom=elements.campusSelect.value==="__custom__";const importCampusCustom=elements.importCampus.value==="__custom__";const sourceCustom=elements.importSource.value==="Other";setVisibility(elements.campusCustomWrap,campusCustom);setVisibility(elements.budgetCustomWrap,campusCustom);setVisibility(elements.storeOneWrap,campusCustom);setVisibility(elements.storeTwoWrap,campusCustom);setVisibility(elements.storeThreeWrap,campusCustom);setVisibility(elements.importCampusCustomWrap,importCampusCustom);setVisibility(elements.importBudgetCustomWrap,importCampusCustom);setVisibility(elements.importStoreOneWrap,importCampusCustom);setVisibility(elements.importStoreTwoWrap,importCampusCustom);setVisibility(elements.importStoreThreeWrap,importCampusCustom);setVisibility(elements.importSourceCustomWrap,sourceCustom)}
+function ensureCustomCampus(name,weeklyBudget,storeNames=[]){const trimmed=name.trim();if(!trimmed)return null;addCustomCampus(trimmed,Number(weeklyBudget||35),storeNames);populateCampusSelects();return trimmed}
+function populateCampusSelects(){[elements.campusSelect,elements.importCampus].forEach(select=>select.innerHTML="");getAvailableCampuses().forEach(campus=>{[elements.campusSelect,elements.importCampus].forEach(select=>{const option=document.createElement("option");option.value=campus;option.textContent=campus;select.appendChild(option)})});[elements.campusSelect,elements.importCampus].forEach(select=>{const option=document.createElement("option");option.value="__custom__";option.textContent="Add my college...";select.appendChild(option)});elements.campusSelect.value=state.campus;elements.importCampus.value=state.campus}
+function populateSourceFilterOptions(){const currentValue=state.source;const sources=[...new Set(getAllMeals().map(meal=>meal.source))].sort();elements.sourceSelect.innerHTML='<option value="all">All apps</option>';sources.forEach(source=>{const option=document.createElement("option");option.value=source;option.textContent=source;elements.sourceSelect.appendChild(option)});elements.sourceSelect.value=sources.includes(currentValue)||currentValue==="all"?currentValue:"all"}
+function updateOverview(meals){const weeklyBudget=getCampusBudget(state.campus);const averageMeal=meals.length?meals.reduce((sum,meal)=>sum+meal.totalPrice,0)/meals.length:0;const averageServing=meals.length?meals.reduce((sum,meal)=>sum+meal.totalPrice/meal.servings,0)/meals.length:0;elements.budgetHeadline.textContent=formatCurrency(weeklyBudget);elements.averageMealCost.textContent=formatCurrency(averageMeal);elements.averageServingCost.textContent=formatCurrency(averageServing);elements.savedCount.textContent=state.savedMeals.size}
+function renderStoreComparison(){const stores=getCampusStores(state.campus);const selectedMeal=getMealById(state.selectedMealId);const planMeals=state.weeklyPlan.map(getMealById).filter(Boolean);const comparisonMeals=selectedMeal?[selectedMeal,...planMeals]:planMeals;const cards=stores.map(store=>({...store,total:Number(comparisonMeals.reduce((sum,meal)=>sum+meal.totalPrice*store.multiplier,0).toFixed(2))})).sort((a,b)=>a.total-b.total);elements.storeComparison.innerHTML=cards.map((store,index)=>`<div class="comparison-card"><div><p class="detail-label">${index===0?"Best value":"Nearby option"}</p><strong>${store.name}</strong><p>${store.note}</p></div><div><span class="store-distance">${store.distance}</span><strong>${formatCurrency(store.total)}</strong></div></div>`).join("")}
+function renderMealDetail(){const rawMeal=getMealById(state.selectedMealId);if(!rawMeal){elements.detailPanel.innerHTML='<p class="detail-empty">Choose a meal to see ingredients, prices, and where to shop nearby.</p>';return}const meal=enrichMeal(rawMeal);const ingredientMarkup=meal.ingredients.map(ingredient=>`<li class="ingredient-item"><div><strong>${ingredient.name}</strong><span class="ingredient-note">${ingredient.amount}</span></div><strong>${formatCurrency(ingredient.price)}</strong></li>`).join("");const storeMarkup=meal.stores.map(store=>`<li class="store-item"><div><strong>${store.name}</strong><span class="store-note">${store.note}</span></div><div><span class="store-distance">${store.distance}</span><strong>${formatCurrency(store.estimatedTotal)}</strong></div></li>`).join("");const stepMarkup=meal.steps.map((step,index)=>`<li class="step-item"><strong>Step ${index+1}</strong><span>${step}</span></li>`).join("");elements.detailPanel.innerHTML=`<div class="detail-heading"><div><p class="eyebrow">${meal.source} import</p><h3>${meal.title}</h3><p class="meal-meta">${meal.campus} | ${meal.cookTime} | ${meal.servings} servings</p></div><div class="detail-price"><span class="detail-label">Meal total</span><strong>${formatCurrency(meal.totalPrice)}</strong><span>${formatCurrency(meal.totalPrice/meal.servings)} per serving</span></div></div><div class="detail-block"><p class="detail-label">Best nearby store</p><div class="comparison-card"><div><strong>${meal.cheapestStore.name}</strong><p>${meal.cheapestStore.note}</p></div><div><span class="store-distance">${meal.cheapestStore.distance}</span><strong>${formatCurrency(meal.cheapestStore.estimatedTotal)}</strong></div></div></div><div class="detail-block"><p class="detail-label">Tags</p><div class="tag-row">${meal.tags.map(tag=>`<span class="tag">${tag}</span>`).join("")}</div></div><div class="detail-block"><p class="detail-label">Imported from</p><p class="meal-meta">${meal.importUrl||"Imported manually inside Campus Bites"}</p></div><div class="detail-block"><p class="detail-label">Ingredient prices</p><ul class="ingredient-list">${ingredientMarkup}</ul></div><div class="detail-block"><p class="detail-label">Where to shop near campus</p><ul class="store-list">${storeMarkup}</ul></div><div class="detail-block"><p class="detail-label">Recipe steps</p><ul class="steps-list">${stepMarkup}</ul></div><div class="detail-block"><div class="planner-actions"><button class="primary-button" id="detailSaveButton" type="button">${state.savedMeals.has(meal.id)?"Saved to your list":"Save this meal"}</button><button class="secondary-button" id="detailPlanButton" type="button">Add to weekly plan</button></div></div>`;document.querySelector("#detailSaveButton").addEventListener("click",()=>toggleSaveMeal(meal.id));document.querySelector("#detailPlanButton").addEventListener("click",()=>addMealToPlan(meal.id))}
+function renderPlanner(){const plannedMeals=state.weeklyPlan.map(getMealById).filter(Boolean).map(enrichMeal);const weeklyBudget=getCampusBudget(state.campus);const total=plannedMeals.reduce((sum,meal)=>sum+meal.cheapestStore.estimatedTotal,0);const remaining=weeklyBudget-total;elements.plannerSummary.innerHTML=`<div><p class="detail-label">Planned spend</p><strong>${formatCurrency(total)}</strong></div><div><p class="detail-label">Budget left</p><strong>${formatCurrency(remaining)}</strong></div>`;if(!plannedMeals.length){elements.plannerList.innerHTML=`<div class="empty-state"><h4>Your weekly plan is empty.</h4><p>Add a meal from the browser to build out a low-cost week.</p></div>`;return}elements.plannerList.innerHTML=plannedMeals.map((meal,index)=>`<div class="planner-item"><div><strong>${meal.title}</strong><p>${meal.cheapestStore.name} | ${meal.servings} servings | ${meal.cookTime}</p></div><div><strong>${formatCurrency(meal.cheapestStore.estimatedTotal)}</strong><button type="button" data-remove-plan="${index}">Remove</button></div></div>`).join("");document.querySelectorAll("[data-remove-plan]").forEach(button=>button.addEventListener("click",()=>{state.weeklyPlan.splice(Number(button.getAttribute("data-remove-plan")),1);persistWeeklyPlan();renderPlanner();renderStoreComparison()}))}
+function renderMealGrid(){const meals=getVisibleMeals();elements.mealGrid.innerHTML="";elements.mealCount.textContent=`${meals.length} meal${meals.length===1?"":"s"}`;if(!meals.length){elements.mealGrid.innerHTML=`<div class="empty-state"><h4>No meals match this filter.</h4><p>Try another campus, source app, or raise the max meal price.</p></div>`;elements.detailPanel.innerHTML='<p class="detail-empty">No meal selected right now because the current filters returned no matches.</p>';updateOverview(meals);renderStoreComparison();return}if(!state.selectedMealId||!meals.some(meal=>meal.id===state.selectedMealId))state.selectedMealId=meals[0].id;meals.forEach(meal=>{const card=elements.cardTemplate.content.firstElementChild.cloneNode(true);const sourcePill=card.querySelector(".source-pill");const saveButton=card.querySelector(".save-button");sourcePill.textContent=meal.source;sourcePill.classList.add(meal.source.toLowerCase());card.querySelector(".meal-title").textContent=meal.title;card.querySelector(".meal-meta").textContent=`${meal.campus} | ${meal.cookTime} | ${meal.servings} servings`;card.querySelector(".meal-total").textContent=formatCurrency(meal.totalPrice);card.querySelector(".meal-serving").textContent=formatCurrency(meal.totalPrice/meal.servings);const tagRow=card.querySelector(".tag-row");meal.tags.forEach(tag=>{const node=document.createElement("span");node.className="tag";node.textContent=tag;tagRow.appendChild(node)});saveButton.textContent=state.savedMeals.has(meal.id)?"Saved":"Save";saveButton.classList.toggle("is-saved",state.savedMeals.has(meal.id));card.classList.toggle("is-active",meal.id===state.selectedMealId);saveButton.addEventListener("click",event=>{event.stopPropagation();toggleSaveMeal(meal.id)});card.addEventListener("click",()=>{state.selectedMealId=meal.id;renderApp()});elements.mealGrid.appendChild(card)});updateOverview(meals);renderMealDetail();renderStoreComparison()}
+function toggleSaveMeal(mealId){if(state.savedMeals.has(mealId))state.savedMeals.delete(mealId);else state.savedMeals.add(mealId);persistSavedMeals();renderApp()}
+function addMealToPlan(mealId){state.weeklyPlan.push(mealId);persistWeeklyPlan();renderPlanner();renderStoreComparison()}
+function loadDemoRecipe(){elements.importSource.value="TikTok";elements.importCampus.value=state.campus;elements.importUrl.value="https://www.tiktok.com/example/dorm-chili-mac";elements.importTitle.value="Dorm Chili Mac";elements.importPrice.value="8.75";elements.importServings.value="3";elements.importCookTime.value="15 min";elements.importIngredients.value=["Elbow pasta | 8 oz | 1.49","Turkey chili | 1 can | 3.29","Shredded cheddar | 1 cup | 1.79","Milk | 0.5 cup | 0.68","Frozen corn | 1 cup | 1.50"].join("\n");elements.importSteps.value=["Boil pasta until tender.","Warm chili with milk and corn.","Stir in pasta and top with cheddar."].join("\n");elements.importStatus.textContent="Demo recipe loaded";syncCustomInputVisibility()}
+function showSavedMeals(){const savedMeals=getAllMeals().filter(meal=>state.savedMeals.has(meal.id)).map(enrichMeal);if(!savedMeals.length){elements.detailPanel.innerHTML=`<p class="detail-empty">You have not saved any meals yet. Try saving a meal card to build your budget meal list.</p>`;return}elements.detailPanel.innerHTML=`<div class="detail-heading"><div><p class="eyebrow">Saved list</p><h3>Your budget meal board</h3><p class="meal-meta">${savedMeals.length} saved recipe${savedMeals.length===1?"":"s"}</p></div></div><div class="detail-block"><p class="detail-label">Saved meals</p><ul class="store-list">${savedMeals.map(meal=>`<li class="store-item"><div><strong>${meal.title}</strong><span class="store-note">${meal.source} | ${meal.campus}</span></div><div><span class="store-distance">${meal.cheapestStore.name}</span><strong>${formatCurrency(meal.cheapestStore.estimatedTotal)}</strong></div></li>`).join("")}</ul></div>`}
+function handleImportSubmit(event){event.preventDefault();const ingredients=elements.importIngredients.value.split("\n").map(line=>line.trim()).filter(Boolean).map(line=>{const [name,amount,price]=line.split("|").map(part=>part.trim());return {name:name||"Ingredient",amount:amount||"1 unit",price:Number(price||0)}});const steps=elements.importSteps.value.split("\n").map(line=>line.trim()).filter(Boolean);const title=elements.importTitle.value.trim();const resolvedSource=elements.importSource.value==="Other"?elements.importSourceCustom.value.trim():elements.importSource.value;const resolvedCampus=elements.importCampus.value==="__custom__"?ensureCustomCampus(elements.importCampusCustom.value,elements.importBudgetCustom.value,[elements.importStoreOne.value,elements.importStoreTwo.value,elements.importStoreThree.value]):elements.importCampus.value;if(!title||!ingredients.length||!steps.length||!resolvedSource||!resolvedCampus){elements.importStatus.textContent="Add a title, source, campus, ingredients, and steps";return}const customMeal={id:`custom-${slugify(title)}-${Date.now()}`,title,source:resolvedSource,campus:resolvedCampus,totalPrice:Number(elements.importPrice.value||0),servings:Number(elements.importServings.value||1),cookTime:elements.importCookTime.value.trim()||"15 min",tags:["Student imported","Budget tracked","Custom meal"],importUrl:elements.importUrl.value.trim(),ingredients,steps};customMeals.unshift(customMeal);persistCustomMeals();state.campus=customMeal.campus;state.selectedMealId=customMeal.id;elements.campusSelect.value=state.campus;elements.importCampus.value=state.campus;elements.importForm.reset();elements.importStatus.textContent="Recipe imported into your meal board";syncCustomInputVisibility();renderApp()}
+function bindEvents(){elements.campusSelect.addEventListener("change",event=>{if(event.target.value==="__custom__"){syncCustomInputVisibility();return}state.campus=event.target.value;elements.importCampus.value=state.campus;syncCustomInputVisibility();renderApp()});elements.sourceSelect.addEventListener("change",event=>{state.source=event.target.value;renderApp()});elements.priceRange.addEventListener("input",event=>{state.maxPrice=Number(event.target.value);elements.priceRangeLabel.textContent=formatCurrency(state.maxPrice);renderApp()});elements.focusImport.addEventListener("click",()=>elements.importSection.scrollIntoView({behavior:"smooth",block:"start"}));elements.importCampus.addEventListener("change",syncCustomInputVisibility);elements.importSource.addEventListener("change",syncCustomInputVisibility);elements.campusCustom.addEventListener("change",()=>{const campusName=ensureCustomCampus(elements.campusCustom.value,elements.budgetCustom.value,[elements.storeOne.value,elements.storeTwo.value,elements.storeThree.value]);if(!campusName)return;state.campus=campusName;elements.campusSelect.value=campusName;elements.importCampus.value=campusName;syncCustomInputVisibility();renderApp()});elements.budgetCustom.addEventListener("change",()=>{if(elements.campusSelect.value==="__custom__"){const campusName=ensureCustomCampus(elements.campusCustom.value,elements.budgetCustom.value,[elements.storeOne.value,elements.storeTwo.value,elements.storeThree.value]);if(campusName){state.campus=campusName;elements.campusSelect.value=campusName;elements.importCampus.value=campusName;syncCustomInputVisibility();renderApp()}}});[elements.storeOne,elements.storeTwo,elements.storeThree].forEach(input=>input.addEventListener("change",()=>{if(elements.campusSelect.value==="__custom__"){const campusName=ensureCustomCampus(elements.campusCustom.value,elements.budgetCustom.value,[elements.storeOne.value,elements.storeTwo.value,elements.storeThree.value]);if(campusName){state.campus=campusName;elements.campusSelect.value=campusName;elements.importCampus.value=campusName;syncCustomInputVisibility();renderApp()}}}));elements.savedToggle.addEventListener("click",showSavedMeals);elements.loadExampleRecipe.addEventListener("click",loadDemoRecipe);elements.importForm.addEventListener("submit",handleImportSubmit);elements.addSelectedToPlan.addEventListener("click",()=>{if(state.selectedMealId)addMealToPlan(state.selectedMealId)});elements.clearPlan.addEventListener("click",()=>{state.weeklyPlan=[];persistWeeklyPlan();renderPlanner();renderStoreComparison()})}
+function renderApp(){populateSourceFilterOptions();renderMealGrid();renderPlanner()}
+bindThemeControls();populateCampusSelects();bindEvents();syncCustomInputVisibility();renderApp();
+  </script>
+</body>
+</html>
