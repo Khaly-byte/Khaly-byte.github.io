@@ -1,0 +1,815 @@
+:root {
+  --bg: #f6f0e8;
+  --ink: #1d1d1d;
+  --muted: #675f57;
+  --line: rgba(29, 29, 29, 0.1);
+  --card-shadow: 0 20px 50px rgba(68, 48, 28, 0.12);
+  --accent: #d95d39;
+  --accent-dark: #8b2f1d;
+  --leaf: #406343;
+  --instagram: #d4557f;
+  --tiktok: #111111;
+  --facebook: #1d61d6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Source Sans 3", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(212, 164, 69, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(64, 99, 67, 0.18), transparent 22%),
+    linear-gradient(180deg, #fdf7ef 0%, #f6f0e8 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 48px;
+}
+
+.hero {
+  padding: 12px 0 24px;
+}
+
+.topbar,
+.hero-grid,
+.theme-grid,
+.control-grid,
+.content-grid,
+.planner-grid,
+.import-grid,
+.import-workbench,
+.form-grid,
+.form-actions,
+.planner-actions,
+.budget-breakdown,
+.price-row,
+.meal-card-top,
+.tag-row,
+.list-header,
+.hero-actions,
+.hero-points {
+  display: flex;
+}
+
+.topbar,
+.list-header,
+.meal-card-top {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.brand-mark {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), #f49763);
+  color: white;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: var(--card-shadow);
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
+h4,
+.budget-number {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 1.4rem;
+}
+
+h2 {
+  font-size: clamp(2.3rem, 4vw, 4.2rem);
+  line-height: 1;
+  margin-bottom: 18px;
+  max-width: 12ch;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  margin-bottom: 10px;
+}
+
+.hero-grid {
+  gap: 26px;
+  margin-top: 32px;
+  align-items: stretch;
+}
+
+.hero-copy,
+.hero-card,
+.theme-panel,
+.controls,
+.meal-list-panel,
+.detail-panel,
+.import-panel,
+.planner-panel,
+.store-panel {
+  background: rgba(255, 250, 244, 0.78);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 28px;
+  box-shadow: var(--card-shadow);
+}
+
+.hero-copy {
+  flex: 1.45;
+  padding: 34px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 42px;
+  background: linear-gradient(135deg, rgba(217, 93, 57, 0.18), rgba(212, 164, 69, 0.08));
+  transform: rotate(18deg);
+}
+
+.hero-card {
+  flex: 0.75;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-text,
+.budget-caption,
+.import-card p,
+.meal-meta,
+.detail-empty,
+.store-note,
+.ingredient-note {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.hero-actions,
+.hero-points,
+.import-grid,
+.import-workbench,
+.form-grid,
+.form-actions,
+.planner-actions,
+.planner-grid,
+.budget-breakdown,
+.content-grid,
+.control-grid,
+.tag-row {
+  gap: 14px;
+}
+
+.hero-actions {
+  margin: 28px 0 24px;
+}
+
+.hero-points {
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-points li,
+.tag {
+  padding: 10px 14px;
+  background: rgba(64, 99, 67, 0.09);
+  color: var(--leaf);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.card-label,
+.price-row span,
+.budget-breakdown span,
+.detail-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.budget-number {
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  line-height: 0.95;
+}
+
+.budget-breakdown {
+  margin-top: 22px;
+  flex-direction: column;
+}
+
+.budget-breakdown div {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button,
+.save-button {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.primary-button,
+.secondary-button,
+.ghost-button {
+  padding: 12px 18px;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: var(--accent);
+  color: white;
+}
+
+.secondary-button {
+  background: rgba(29, 29, 29, 0.08);
+  color: var(--ink);
+}
+
+.ghost-button {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.ghost-button:hover,
+.save-button:hover,
+.meal-card:hover {
+  transform: translateY(-2px);
+}
+
+.import-panel,
+.controls,
+.meal-list-panel,
+.detail-panel,
+.planner-panel,
+.store-panel {
+  padding: 28px;
+}
+
+.import-panel,
+.controls,
+.content-grid,
+.planner-grid {
+  margin-top: 24px;
+}
+
+.theme-panel {
+  margin-top: 24px;
+  padding: 28px;
+}
+
+.theme-grid {
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.theme-grid label {
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.theme-grid input[type="color"] {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: white;
+  padding: 6px;
+}
+
+.import-grid,
+.control-grid,
+.content-grid,
+.planner-grid,
+.form-grid,
+.import-workbench {
+  flex-wrap: wrap;
+}
+
+.import-card,
+.meal-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.import-card {
+  flex: 1 1 220px;
+}
+
+.import-card.active {
+  border-color: rgba(217, 93, 57, 0.35);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 239, 231, 0.9));
+}
+
+.import-app,
+.source-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: white;
+}
+
+.instagram {
+  background: var(--instagram);
+}
+
+.tiktok {
+  background: var(--tiktok);
+}
+
+.facebook {
+  background: var(--facebook);
+}
+
+.controls {
+  display: block;
+}
+
+.import-workbench {
+  margin-top: 22px;
+  align-items: stretch;
+}
+
+.recipe-form,
+.import-preview,
+.planner-summary,
+.planner-item,
+.comparison-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+}
+
+.recipe-form {
+  flex: 1.2;
+  padding: 22px;
+}
+
+.import-preview {
+  flex: 0.8;
+  padding: 22px;
+}
+
+.form-heading,
+.planner-item,
+.comparison-card,
+.planner-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.form-heading {
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.status-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(64, 99, 67, 0.12);
+  color: var(--leaf);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.form-grid label {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.full-span {
+  flex-basis: 100%;
+}
+
+.hidden-input {
+  display: none !important;
+}
+
+input[type="text"],
+input[type="url"],
+input[type="number"],
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px 14px;
+  background: white;
+  color: var(--ink);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-actions,
+.planner-actions {
+  margin-top: 18px;
+}
+
+.preview-list,
+.planner-list,
+.comparison-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+}
+
+.preview-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.preview-list li:last-child {
+  border-bottom: 0;
+}
+
+.control-grid {
+  margin-top: 18px;
+}
+
+.control-grid label {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 700;
+}
+
+select,
+input[type="range"] {
+  width: 100%;
+}
+
+select {
+  background: white;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 13px 14px;
+}
+
+.range-stack {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 8px 14px;
+}
+
+input[type="range"] {
+  accent-color: var(--accent);
+}
+
+.content-grid {
+  align-items: flex-start;
+}
+
+.meal-list-panel {
+  flex: 1.2;
+}
+
+.detail-panel {
+  flex: 0.8;
+  min-width: 300px;
+  position: sticky;
+  top: 20px;
+}
+
+.planner-panel {
+  flex: 1.2;
+}
+
+.store-panel {
+  flex: 0.8;
+  min-width: 300px;
+}
+
+.meal-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.meal-card {
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.meal-card.is-active {
+  border-color: rgba(217, 93, 57, 0.45);
+  box-shadow: 0 16px 40px rgba(217, 93, 57, 0.14);
+}
+
+.save-button {
+  padding: 8px 12px;
+  background: rgba(29, 29, 29, 0.08);
+  font-weight: 700;
+}
+
+.save-button.is-saved {
+  background: rgba(64, 99, 67, 0.12);
+  color: var(--leaf);
+}
+
+.price-row {
+  margin: 18px 0 16px;
+  justify-content: space-between;
+}
+
+.price-row strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.1rem;
+}
+
+.tag-row {
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: rgba(29, 29, 29, 0.06);
+  color: var(--ink);
+  font-size: 0.9rem;
+}
+
+.detail-empty {
+  margin: 0;
+}
+
+.detail-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+}
+
+.detail-heading h3 {
+  margin-bottom: 4px;
+}
+
+.detail-price {
+  min-width: 110px;
+  text-align: right;
+}
+
+.detail-price strong {
+  display: block;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.7rem;
+}
+
+.detail-block {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.ingredient-list,
+.store-list,
+.steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.ingredient-item,
+.store-item,
+.step-item {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+}
+
+.ingredient-item,
+.store-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ingredient-item strong,
+.store-item strong {
+  display: block;
+}
+
+.store-distance {
+  color: var(--leaf);
+  font-weight: 700;
+}
+
+.step-item span {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.empty-state {
+  padding: 28px;
+  border: 1px dashed rgba(29, 29, 29, 0.18);
+  border-radius: 22px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.planner-summary,
+.planner-item,
+.comparison-card {
+  padding: 18px 20px;
+}
+
+.planner-summary {
+  align-items: center;
+  margin-top: 20px;
+}
+
+.planner-summary strong,
+.comparison-card strong,
+.planner-item strong {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.planner-list,
+.store-comparison {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.planner-item,
+.comparison-card {
+  align-items: center;
+}
+
+.planner-item p,
+.comparison-card p,
+.store-panel-copy {
+  color: var(--muted);
+}
+
+.planner-item button {
+  border: 0;
+  background: rgba(29, 29, 29, 0.08);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+@media (max-width: 920px) {
+  .page-shell {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .hero-grid,
+  .content-grid,
+  .planner-grid {
+    flex-direction: column;
+  }
+
+  .detail-panel {
+    position: static;
+  }
+
+  h2 {
+    max-width: 14ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 18px, 1180px);
+  }
+
+  .hero-copy,
+  .hero-card,
+  .theme-panel,
+  .controls,
+  .meal-list-panel,
+  .detail-panel,
+  .import-panel {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .topbar {
+    gap: 14px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .ghost-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .detail-heading,
+  .ingredient-item,
+  .store-item,
+  .price-row,
+  .form-heading,
+  .planner-item,
+  .comparison-card,
+  .planner-summary {
+    flex-direction: column;
+  }
+
+  .detail-price {
+    text-align: left;
+  }
+}

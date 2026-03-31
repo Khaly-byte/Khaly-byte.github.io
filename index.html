@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Bites | Budget Meals for Students</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark">CB</span>
+          <div>
+            <p class="eyebrow">Student budget food finder</p>
+            <h1>Campus Bites</h1>
+          </div>
+        </div>
+        <button class="ghost-button" id="savedToggle" type="button">Saved meals: <span id="savedCount">0</span></button>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Affordable, reliable, social-first meal planning</p>
+          <h2>Save cheap recipes from social apps and see what they really cost near campus.</h2>
+          <p class="hero-text">
+            Browse meal ideas inspired by Instagram, TikTok, and Facebook, compare ingredient costs, and find nearby stores where a student can shop without blowing their weekly budget.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#mealSection">Explore meals</a>
+            <button class="secondary-button" id="focusImport" type="button">View import flow</button>
+          </div>
+          <ul class="hero-points">
+            <li>Visible per-meal price and cost per serving</li>
+            <li>Nearby grocery suggestions by campus</li>
+            <li>Save recipes pulled from social platforms</li>
+          </ul>
+        </div>
+
+        <aside class="hero-card">
+          <p class="card-label">Weekly budget snapshot</p>
+          <div class="budget-number" id="budgetHeadline">$35</div>
+          <p class="budget-caption">Recommended max weekly food budget in the current filter.</p>
+          <div class="budget-breakdown">
+            <div>
+              <span>Average meal total</span>
+              <strong id="averageMealCost">$0.00</strong>
+            </div>
+            <div>
+              <span>Average cost per serving</span>
+              <strong id="averageServingCost">$0.00</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="theme-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Theme studio</p>
+          <h3>Customize the color palette for your app</h3>
+        </div>
+        <div class="theme-grid">
+          <label>
+            Accent
+            <input id="accentColor" type="color" value="#d95d39">
+          </label>
+          <label>
+            Accent dark
+            <input id="accentDarkColor" type="color" value="#8b2f1d">
+          </label>
+          <label>
+            Background
+            <input id="bgColor" type="color" value="#f6f0e8">
+          </label>
+          <label>
+            Ink
+            <input id="inkColor" type="color" value="#1d1d1d">
+          </label>
+          <label>
+            Muted
+            <input id="mutedColor" type="color" value="#675f57">
+          </label>
+          <label>
+            Leaf
+            <input id="leafColor" type="color" value="#406343">
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="secondary-button" id="resetTheme" type="button">Reset palette</button>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="import-panel" id="importSection">
+        <div class="section-heading">
+          <p class="eyebrow">Recipe intake</p>
+          <h3>How recipes can come in from other apps</h3>
+        </div>
+
+        <div class="import-grid">
+          <article class="import-card active">
+            <span class="import-app instagram">Instagram</span>
+            <h4>Reel recipe capture</h4>
+            <p>Save a creator post, then extract the meal name, ingredients, and estimated servings into your campus meal board.</p>
+          </article>
+          <article class="import-card">
+            <span class="import-app tiktok">TikTok</span>
+            <h4>Fast meal idea imports</h4>
+            <p>Pull quick dorm-friendly recipes and tag them by prep time, protein level, and cookware needed.</p>
+          </article>
+          <article class="import-card">
+            <span class="import-app facebook">Facebook</span>
+            <h4>Family and group recipes</h4>
+            <p>Save recipes shared in groups, then match ingredients to stores around your campus or apartment.</p>
+          </article>
+        </div>
+
+        <div class="import-workbench">
+          <form class="recipe-form" id="recipeImportForm">
+            <div class="form-heading">
+              <div>
+                <p class="eyebrow">Import recipe</p>
+                <h4>Save a recipe from social media</h4>
+              </div>
+              <span class="status-chip" id="importStatus">Demo import ready</span>
+            </div>
+
+            <div class="form-grid">
+              <label>
+                Recipe source
+                <select id="importSource">
+                  <option value="Instagram">Instagram</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Other">Other</option>
+                </select>
+              </label>
+
+              <label class="hidden-input" id="importSourceCustomWrap">
+                Custom source
+                <input id="importSourceCustom" type="text" placeholder="YouTube, Reddit, family blog">
+              </label>
+
+              <label>
+                Campus
+                <select id="importCampus"></select>
+              </label>
+
+              <label class="hidden-input" id="importCampusCustomWrap">
+                Custom college or campus
+                <input id="importCampusCustom" type="text" placeholder="Howard University">
+              </label>
+
+              <label class="hidden-input" id="importBudgetCustomWrap">
+                Weekly campus budget
+                <input id="importBudgetCustom" type="number" min="10" max="150" step="1" placeholder="35">
+              </label>
+
+              <label class="hidden-input" id="importStoreOneWrap">
+                Nearby store 1
+                <input id="importStoreOne" type="text" placeholder="Target, Aldi, campus market">
+              </label>
+
+              <label class="hidden-input" id="importStoreTwoWrap">
+                Nearby store 2
+                <input id="importStoreTwo" type="text" placeholder="Local grocery">
+              </label>
+
+              <label class="hidden-input" id="importStoreThreeWrap">
+                Nearby store 3
+                <input id="importStoreThree" type="text" placeholder="Discount store">
+              </label>
+
+              <label class="full-span">
+                Post or recipe URL
+                <input id="importUrl" type="url" placeholder="https://example.com/creator-recipe">
+              </label>
+
+              <label>
+                Meal title
+                <input id="importTitle" type="text" placeholder="Dorm Chili Mac">
+              </label>
+
+              <label>
+                Total meal price
+                <input id="importPrice" type="number" min="1" max="30" step="0.01" placeholder="8.75">
+              </label>
+
+              <label>
+                Servings
+                <input id="importServings" type="number" min="1" max="8" step="1" placeholder="3">
+              </label>
+
+              <label>
+                Prep time
+                <input id="importCookTime" type="text" placeholder="15 min">
+              </label>
+
+              <label class="full-span">
+                Ingredients
+                <textarea id="importIngredients" rows="4" placeholder="Pasta | 8 oz | 1.49&#10;Ground turkey | 1 lb | 4.99&#10;Shredded cheese | 1 cup | 1.79"></textarea>
+              </label>
+
+              <label class="full-span">
+                Recipe steps
+                <textarea id="importSteps" rows="4" placeholder="Boil pasta.&#10;Brown turkey.&#10;Combine with cheese and sauce."></textarea>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Import recipe</button>
+              <button class="secondary-button" id="loadExampleRecipe" type="button">Load demo recipe</button>
+            </div>
+          </form>
+
+          <aside class="import-preview">
+            <p class="eyebrow">Import preview</p>
+            <h4>What gets saved</h4>
+            <ul class="preview-list">
+              <li>Source app and original link</li>
+              <li>Ingredients with visible prices</li>
+              <li>Estimated total and cost per serving</li>
+              <li>Nearby stores matched to the selected campus</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="controls" id="mealSection">
+        <div class="section-heading">
+          <p class="eyebrow">Meal browser</p>
+          <h3>Find meals that match your budget and your campus</h3>
+        </div>
+
+        <div class="control-grid">
+          <label>
+            Campus
+            <select id="campusSelect"></select>
+          </label>
+
+          <label class="hidden-input" id="campusCustomWrap">
+            Custom college or campus
+            <input id="campusCustom" type="text" placeholder="Enter your school name">
+          </label>
+
+          <label class="hidden-input" id="budgetCustomWrap">
+            Weekly budget
+            <input id="budgetCustom" type="number" min="10" max="150" step="1" placeholder="35">
+          </label>
+
+          <label class="hidden-input" id="storeOneWrap">
+            Nearby store 1
+            <input id="storeOne" type="text" placeholder="Target, Aldi, campus market">
+          </label>
+
+          <label class="hidden-input" id="storeTwoWrap">
+            Nearby store 2
+            <input id="storeTwo" type="text" placeholder="Local grocery">
+          </label>
+
+          <label class="hidden-input" id="storeThreeWrap">
+            Nearby store 3
+            <input id="storeThree" type="text" placeholder="Discount store">
+          </label>
+
+          <label>
+            Source app
+            <select id="sourceSelect">
+              <option value="all">All apps</option>
+              <option value="Instagram">Instagram</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Facebook">Facebook</option>
+            </select>
+          </label>
+
+          <label>
+            Max total meal price
+            <div class="range-stack">
+              <input id="priceRange" type="range" min="6" max="20" step="1" value="14">
+              <span id="priceRangeLabel">$14</span>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="meal-list-panel">
+          <div class="list-header">
+            <h3>Affordable meal ideas</h3>
+            <p id="mealCount">0 meals</p>
+          </div>
+          <div class="meal-grid" id="mealGrid"></div>
+        </div>
+
+        <aside class="detail-panel" id="detailPanel">
+          <p class="detail-empty">Choose a meal to see ingredients, prices, and where to shop nearby.</p>
+        </aside>
+      </section>
+
+      <section class="planner-grid">
+        <section class="planner-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Weekly planner</p>
+            <h3>Build a week of meals that stays under budget</h3>
+          </div>
+          <div class="planner-actions">
+            <button class="primary-button" id="addSelectedToPlan" type="button">Add selected meal to plan</button>
+            <button class="ghost-button" id="clearPlan" type="button">Clear plan</button>
+          </div>
+          <div class="planner-summary" id="plannerSummary"></div>
+          <div class="planner-list" id="plannerList"></div>
+        </section>
+
+        <aside class="store-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Store comparison</p>
+            <h3>Best nearby places to shop</h3>
+          </div>
+          <p class="store-panel-copy">Estimated totals update as you switch campuses and choose different meals.</p>
+          <div class="store-comparison" id="storeComparison"></div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <template id="mealCardTemplate">
+    <article class="meal-card">
+      <div class="meal-card-top">
+        <span class="source-pill"></span>
+        <button class="save-button" type="button">Save</button>
+      </div>
+      <h4 class="meal-title"></h4>
+      <p class="meal-meta"></p>
+      <div class="price-row">
+        <div>
+          <span>Total</span>
+          <strong class="meal-total"></strong>
+        </div>
+        <div>
+          <span>Per serving</span>
+          <strong class="meal-serving"></strong>
+        </div>
+      </div>
+      <div class="tag-row"></div>
+    </article>
+  </template>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
